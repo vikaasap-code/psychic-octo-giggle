@@ -9,27 +9,26 @@
 - macOS с Xcode 15+
 - iOS 16+
 
-## Быстрый запуск в Xcode
-1) Откройте Xcode → Create a new Xcode Project → iOS → App.
-2) Название: `InterstellarAstro`, Interface: SwiftUI, Language: Swift, Core Data: Off.
-3) После создания проекта, в Finder перетащите папку `Sources` в левую панель проекта (в группу проекта). Отметьте «Copy items if needed» и добавьте файлы в основной target.
-4) Удалите сгенерированный `ContentView.swift`, если он есть, т.к. точка входа уже реализована в `InterstellarAstroApp.swift`.
-5) В Scheme выберите симулятор iPhone (iOS 16+) и нажмите Run (⌘R).
+## Запуск
+1) Откройте проект: `ios/InterstellarAstro/InterstellarAstro.xcodeproj`.
+2) В Scheme выберите симулятор iPhone (iOS 16+) и нажмите Run (⌘R).
+3) Для запуска на реальном устройстве укажите свой Team в настройках Target (Signing & Capabilities).
 
 ## Навигация
 - Root: `InterstellarHeroView` (главная кинематографичная сцена) с кнопками:
-  - «Рассчитать мою карту» → Переход в `ProfileView`.
-  - «Проверить совместимость» → Переход в `PeopleSelectionView`.
-- Все строки локализованы на русском, формат и тексты ориентированы на РФ.
+  - «Рассчитать мою карту» → `ProfileView`.
+  - «Проверить совместимость» → `PeopleSelectionView`.
 
 ## Структура
-- `Sources/App/InterstellarAstroApp.swift` — @main App и корневой `RootView` с навигацией.
-- `Sources/App/RootView.swift` — `NavigationStack`, маршрутизация между экранами, мок-данные.
+- `Sources/App/InterstellarAstroApp.swift` — @main App и корневой `RootView`.
+- `Sources/App/RootView.swift` — `NavigationStack`, маршруты и мок-данные.
 - `Sources/Views/InterstellarHeroView.swift` — главная сцена (анимации «Интерстеллар»).
-- `Sources/Views/PeopleSelectionView.swift` — выбор человека, шкала совместимости, бейджи и кольцевой индикатор.
-- `Sources/Views/ProfileView.swift` — профиль с небесно-голубым фоном, до 15 фото, хобби и Пруст.
+- `Sources/Views/PeopleSelectionView.swift` — выбор человека и шкала совместимости.
+- `Sources/Views/ProfileView.swift` — профиль (до 15 фото, хобби и Пруст).
+- `Info.plist` — ключи, включая `NSPhotoLibraryUsageDescription` (RU).
+- `Resources/Assets.xcassets` — ассеты (AppIcon placeholder).
 
-## Заметки
-- В проекте нет ассетов: вся графика генерируется кодом (Canvas/градиенты/шейпы).
-- Для реального бэкенда расчётов натальных карт предусмотрите API и модель данных (даты, время и место рождения с таймзонами РФ и согласиями по 152‑ФЗ).
-- Визуальные параметры (интенсивность анимаций, палитра) можно регулировать в соответствующих вью.
+## Примечания
+- Визуал построен на Canvas/градиентах/шейпах — без внешних ассетов.
+- Для релизной сборки замените `PRODUCT_BUNDLE_IDENTIFIER` и добавьте иконки в `AppIcon.appiconset`.
+- Поддержка РФ: русский язык, 24‑часовое время, тексты и дисклеймер 18+.
